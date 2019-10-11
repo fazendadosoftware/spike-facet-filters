@@ -3,14 +3,14 @@
     <div class="row">
       <div>
         <div>Applications Facet Filter State</div>
-        <pre class="cell shadow">{{facetFilterState.applications}}</pre>
+        <pre class="cell shadow">{{facetFilterStateApplications}}</pre>
         <div>
           {{applications.length}} Application{{applications.length === 1 ? '' : 's'}}
         </div>
       </div>
       <div>
         <div>UserGroups Facet Filter State</div>
-        <pre class="cell shadow">{{facetFilterState.userGroups}}</pre>
+        <pre class="cell shadow">{{facetFilterStateUserGroups}}</pre>
         <div>
           {{userGroups.length}} User Group{{userGroups.length === 1 ? '' : 's'}}
         </div>
@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import Vue from 'vue'
 export default {
   name: 'app',
   data: () => ({
-    facetFilterState: { applications: {}, userGroups: {} },
+    facetFilterStateApplications: {},
+    facetFilterStateUserGroups: {},
     applications: [],
     userGroups: []
   }),
@@ -38,14 +38,14 @@ export default {
               key: 1,
               label: 'Applications',
               fixedFactSheetType: 'Application',
-              facetFiltersChangedCallback: filter => Vue.set(this.facetFilterState, 'applications', filter),
+              facetFiltersChangedCallback: filter => { this.facetFilterStateApplications = filter },
               callback: dataset => { this.applications = dataset }
             },
             {
               key: 2,
               label: 'User Groups',
               fixedFactSheetType: 'UserGroup',
-              facetFiltersChangedCallback: filter => Vue.set(this.facetFilterState, 'userGroups', filter),
+              facetFiltersChangedCallback: filter => { this.facetFilterStateUserGroups = filter },
               callback: dataset => { this.userGroups = dataset }
             }
           ]
